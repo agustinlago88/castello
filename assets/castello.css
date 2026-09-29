@@ -284,6 +284,24 @@ p { text-wrap: pretty; }
   color: var(--ink-soft);
 }
 
+.hero-bio-creds {
+  margin-top: 24px;
+  gap: 8px;
+}
+
+.hero-bio-creds li {
+  padding-bottom: 8px;
+  font-size: 14px;
+}
+
+.hero .registro {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-deep);
+}
+
 .hero-media { position: relative; }
 
 .hero-media .frame {
@@ -297,7 +315,8 @@ p { text-wrap: pretty; }
   width: 100%;
   height: auto;
   object-fit: cover;
-  aspect-ratio: 580 / 540;
+  object-position: center top;
+  aspect-ratio: 4 / 5;
 }
 
 .hero-media::before {
