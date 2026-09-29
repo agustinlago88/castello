@@ -766,8 +766,8 @@ p { text-wrap: pretty; }
 
 .ig-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
   margin-top: 36px;
 }
 
