@@ -987,12 +987,126 @@ p { text-wrap: pretty; }
   margin: 0 auto;
 }
 
-.cta-final .btn { margin-top: 34px; }
-
 .cta-final .cta-note {
   margin-top: 18px;
   font-size: 13.5px;
   color: var(--ink-soft);
+}
+
+/* ---------- Formulario de contacto ---------- */
+
+.contact-form-wrapper {
+  max-width: 680px;
+  margin: 48px auto 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 40px 42px;
+  box-shadow: 0 12px 36px -12px rgba(46, 71, 86, 0.08);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.form-group label .required {
+  color: #D32F2F;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(74, 107, 130, 0.18);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.5;
+}
+
+.form-submit-row {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-submit-row .btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 15.5px;
+  padding: 15px 28px;
+  cursor: pointer;
+}
+
+.form-status {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: none;
+}
+
+.form-status.success {
+  display: block;
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+.form-status.error {
+  display: block;
+  background: #FFEBEE;
+  color: #C62828;
+  border: 1px solid #FFCDD2;
+}
+
+.form-privacy-note {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.45;
 }
 
 /* ---------- Footer ---------- */
@@ -1252,6 +1366,16 @@ button:focus-visible {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 24px;
+  }
+
+  .contact-form-wrapper {
+    padding: 28px 20px;
+    margin-top: 36px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 

@@ -152,6 +152,63 @@
     });
   }
 
+  // ---------- Formulario de contacto (Formspree AJAX + fallback) ----------
+  function setupContactForm() {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Enviando consulta...';
+      }
+
+      var formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          status.className = 'form-status success';
+          status.textContent = '¡Gracias por contactarnos! Tu consulta fue enviada exitosamente a la Dra. Castello. Nos comunicaremos a la brevedad.';
+          form.reset();
+        } else {
+          return response.json().then(function (data) {
+            throw new Error(data && data.errors ? data.errors.map(function (err) { return err.message; }).join(', ') : 'Error en el envío');
+          });
+        }
+      }).catch(function (error) {
+        // Fallback: abrir cliente de correo directamente hacia la casilla
+        var nombre = form.querySelector('[name="nombre"]') ? form.querySelector('[name="nombre"]').value : '';
+        var mail = form.querySelector('[name="_replyto"]') ? form.querySelector('[name="_replyto"]').value : '';
+        var tel = form.querySelector('[name="whatsapp"]') ? form.querySelector('[name="whatsapp"]').value : '';
+        var motivo = form.querySelector('[name="motivo"]') ? form.querySelector('[name="motivo"]').value : '';
+        var mensaje = form.querySelector('[name="mensaje"]') ? form.querySelector('[name="mensaje"]').value : '';
+
+        var subject = encodeURIComponent('Consulta Web - ' + (motivo || 'Dra. Castello'));
+        var body = encodeURIComponent('Nombre: ' + nombre + '\nEmail: ' + mail + '\nWhatsApp: ' + tel + '\nProcedimiento de interés: ' + motivo + '\n\nDetalle / Caso:\n' + mensaje);
+
+        window.location.href = 'mailto:dramariaecastello@gmail.com?subject=' + subject + '&body=' + body;
+
+        status.className = 'form-status success';
+        status.textContent = 'Se abrió tu cliente de correo para enviar la consulta directamente a dramariaecastello@gmail.com.';
+      }).finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      });
+    });
+  }
+
   // ---------- Init ----------
   function init() {
     setupReveal();
@@ -159,6 +216,7 @@
     setupHamburger();
     setupActiveNav();
     setupSmoothScroll();
+    setupContactForm();
   }
 
   if (document.readyState === 'loading') {
