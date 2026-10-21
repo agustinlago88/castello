@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agustinlago88.github.io/castello/sitemap.xml
